@@ -1,0 +1,18 @@
+version: '3.8'
+services:
+  node-red:
+    image: nodered/node-red:4.0.2
+    container_name: nodered
+    volumes:
+      - ./recipeRuntime:/data
+      - ../custom_nodes:/data/custom_nodes
+    ports:
+      - 1880:1880
+
+  node-red-wrapper:
+    build:
+      context: 'node-red-wrapper'
+    ports:
+      - "3000:3000"
+    depends_on:
+      - node-red
